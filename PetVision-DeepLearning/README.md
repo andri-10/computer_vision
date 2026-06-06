@@ -32,17 +32,17 @@ The dataset contains 37 pet categories with roughly 200 images per class. The cu
 
 ```text
 PetVision-DeepLearning/
-├── README.md
-├── requirements.txt
-├── report/
-├── notebooks/
-├── src/
-├── models/
-├── results/
-└── demo/
+|-- README.md
+|-- requirements.txt
+|-- report/
+|-- notebooks/
+|-- src/
+|-- models/
+|-- results/
+`-- demo/
 ```
 
-## Installation
+## Local Installation
 
 Create and activate a Python environment, then install dependencies:
 
@@ -50,38 +50,65 @@ Create and activate a Python environment, then install dependencies:
 pip install -r requirements.txt
 ```
 
-## Running on Google Colab
+## Running on Google Colab with Git
 
-Yes, this project can run on Google Colab. The recommended workflow is to upload the full project folder to Google Drive:
+This project is designed to work with a GitHub-based Colab workflow:
 
-```text
-My Drive/
-└── PetVision-DeepLearning/
+- Push changes from your PC to GitHub.
+- Pull the newest changes inside Colab before running notebooks.
+- Commit and push Colab changes only when you want to keep updated notebooks, reports, or result files.
+
+First, push this project to GitHub from your PC:
+
+```bash
+git add PetVision-DeepLearning
+git commit -m "Add PetVision project scaffold"
+git remote add origin https://github.com/YOUR_USERNAME/PetVision-DeepLearning.git
+git push -u origin main
 ```
 
-Then open the notebooks from:
-
-```text
-PetVision-DeepLearning/notebooks/
-```
-
-At the top of every notebook there is a **Google Colab Setup** section. Run that section first when using Colab. It mounts Google Drive, changes into the project folder, and installs any extra packages Colab may need:
+In Colab, either open a notebook from GitHub or create a blank notebook and clone the repository:
 
 ```python
-from google.colab import drive
-drive.mount('/content/drive')
+REPO_URL = "https://github.com/YOUR_USERNAME/PetVision-DeepLearning.git"
+PROJECT_DIR = "/content/PetVision-DeepLearning"
 
-%cd /content/drive/MyDrive/PetVision-DeepLearning
-!pip install -q tensorflow-datasets seaborn scikit-learn streamlit opencv-python
+!git clone $REPO_URL $PROJECT_DIR
+%cd $PROJECT_DIR
+!pip install -q -r requirements.txt
 ```
 
-If you are running locally, skip the Colab setup cell and continue with the normal notebook cells.
+At the top of every project notebook there is a **Google Colab Git Setup** section. Replace the `REPO_URL` placeholder with your real GitHub repository URL, then run the setup cell. It will:
+
+- clone the repository into `/content/PetVision-DeepLearning` if it is missing
+- run `git pull` if the repository already exists
+- install dependencies from `requirements.txt`
+- switch the notebook working directory to the project root
+
+If you are running locally, skip the Colab Git setup cell and continue with the normal notebook cells.
 
 Before training, enable a GPU in Colab:
 
 ```text
 Runtime -> Change runtime type -> Hardware accelerator -> GPU -> Save
 ```
+
+Useful Colab Git commands:
+
+```bash
+# Pull latest work from GitHub
+git pull
+
+# Check changed files
+git status
+
+# Commit and push Colab changes
+git add notebooks results report README.md
+git commit -m "Update training results"
+git push
+```
+
+For private repositories, Colab may ask for GitHub authentication. Use a GitHub personal access token or keep the repository public during the class project.
 
 ## How to Run
 
