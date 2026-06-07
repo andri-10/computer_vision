@@ -212,6 +212,7 @@ Potential improvements:
 
 ## 13. References
 
+- Christian Mata, PhD: Computer Vision, EMSSE
 - Oxford-IIIT Pet Dataset
 - TensorFlow Datasets
 - Keras Applications
